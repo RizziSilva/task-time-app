@@ -6,7 +6,9 @@
     "paths": {
       "@pages": ["./src/pages/"],
       "@navigation": ["./src/navigation/"],
-      "@constants": ["./src/constants/"]
+      "@constants": ["./src/constants/"],
+      "@layout": ["./src/layout/"],
+      "@types": ["./src/types/"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"]
