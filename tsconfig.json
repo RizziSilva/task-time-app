@@ -8,8 +8,9 @@
       "@navigation": ["./src/navigation/"],
       "@constants": ["./src/constants/"],
       "@layout": ["./src/layout/"],
-      "@types": ["./src/types/"]
+      "@types": ["./src/types/"],
+      "@statics": ["./src/statics/"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": ["**/*.ts", "**/*.tsx", "src/types/declaration.d.ts"]
 }

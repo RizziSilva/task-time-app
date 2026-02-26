@@ -10,7 +10,7 @@ const Stack = createNativeStackNavigator<StackProps>()
 
 export function AuthStack() {
   return (
-    <Stack.Navigator layout={({ children }) => <AuthLayout>{children}</AuthLayout>} screenOptions={{ headerShown: false }}>
+    <Stack.Navigator screenLayout={({ children }) => <AuthLayout>{children}</AuthLayout>} screenOptions={{ headerShown: false }}>
       <Stack.Screen name='Login' component={Login} />
     </Stack.Navigator>
   )

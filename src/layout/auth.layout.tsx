@@ -13,9 +13,11 @@ export function AuthLayout({ children }: { children: ReactNode }) {
 const styles = StyleSheet.create({
   containerSafeArea: {
     flex: 1,
-    backgroundColor: 'green',
   },
   container: {
     flex: 1,
+    backgroundColor: '#010101',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 })
