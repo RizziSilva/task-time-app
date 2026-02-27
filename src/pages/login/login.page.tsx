@@ -1,47 +1,50 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { FullLogo } from '@statics'
+import { Image, Pressable, Text, TextInput, View } from 'react-native'
+import { ClosedEye, FullLogo, OpenedEye } from '@statics'
+import { styles } from './login.style'
 
 export function Login() {
+  function getPasswordIcon() {
+    const isPressed = false
+
+    return isPressed ? ClosedEye : OpenedEye
+  }
+
+  function renderPasswordExtraContent(isPassword: boolean) {
+    if (!isPassword) return null
+
+    return (
+      <>
+        <Text style={styles.resetPasswordText}>Reset password</Text>
+        <Pressable style={styles.passwordReveal}>
+          <Image style={styles.passwordImage} source={getPasswordIcon()} />
+        </Pressable>
+      </>
+    )
+  }
+
+  function renderInput(label: string, isPassword: boolean) {
+    const passwordStyle = isPassword ? styles.passwordInput : null
+    return (
+      <View style={styles.containerInput}>
+        <Text style={styles.inputLabel}>{label}</Text>
+        <TextInput style={[styles.input, passwordStyle]} />
+        {renderPasswordExtraContent(isPassword)}
+      </View>
+    )
+  }
+
   return (
     <View style={styles.container}>
       <Image style={styles.logoImage} source={FullLogo} />
       <Text style={styles.title}>Log in and start Working</Text>
-      <TouchableOpacity style={styles.loginButton}>
+      {renderInput('Email', false)}
+      {renderInput('Password', true)}
+      <Pressable style={styles.loginButton}>
         <Text style={styles.loginButtonText}>Log in</Text>
-      </TouchableOpacity>
+      </Pressable>
+      <Pressable style={styles.signUpButton}>
+        <Text style={styles.loginButtonText}>Sign up for an account</Text>
+      </Pressable>
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    maxWidth: 344,
-    width: 344,
-    maxHeight: 576,
-    backgroundColor: '#1b1b1b',
-    borderRadius: 8,
-    padding: 32,
-    alignItems: 'center',
-  },
-  logoImage: {
-    marginBottom: 5,
-  },
-  title: {
-    fontSize: 16,
-    fontWeight: 500,
-    color: '#b1b1b1',
-  },
-  loginButton: {
-    width: '100%',
-    backgroundColor: '#D65C56',
-    paddingHorizontal: 10,
-    alignItems: 'center',
-    height: 36,
-    justifyContent: 'center',
-    borderRadius: 5,
-  },
-  loginButtonText: {
-    color: 'white',
-  },
-})
