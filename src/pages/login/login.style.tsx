@@ -78,5 +78,15 @@ export const styles = StyleSheet.create({
   passwordImage: {
     width: 20,
     height: 20,
+    color: '#ffffff',
+  },
+  errorMessage: {
+    color: '#e89081',
+    fontWeight: 500,
+    fontSize: 12,
+    marginVertical: 4,
+  },
+  inputError: {
+    borderColor: '#e89081',
   },
 })

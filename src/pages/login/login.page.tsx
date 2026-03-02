@@ -1,12 +1,19 @@
 import { Image, Pressable, Text, TextInput, View } from 'react-native'
-import { ClosedEye, FullLogo, OpenedEye } from '@statics'
+import { FullLogo } from '@statics'
+import { LoginInputsType } from '@types'
+import { LOGIN_INPUTS } from './constants'
+import { useLogin } from './hook'
 import { styles } from './login.style'
 
 export function Login() {
-  function getPasswordIcon() {
-    const isPressed = false
+  const { isPasswordHide, handleShowPasswordClick, getPasswordIcon, onInputChange, handleCheckForErrors, getErrorMessage, getInputHasError } = useLogin()
 
-    return isPressed ? ClosedEye : OpenedEye
+  function renderErrorMessage(name: string) {
+    const message: string = getErrorMessage(name)
+
+    if (!message) return null
+
+    return <Text style={styles.errorMessage}>{message}</Text>
   }
 
   function renderPasswordExtraContent(isPassword: boolean) {
@@ -15,19 +22,25 @@ export function Login() {
     return (
       <>
         <Text style={styles.resetPasswordText}>Reset password</Text>
-        <Pressable style={styles.passwordReveal}>
+        <Pressable style={styles.passwordReveal} onPress={handleShowPasswordClick}>
           <Image style={styles.passwordImage} source={getPasswordIcon()} />
         </Pressable>
       </>
     )
   }
 
-  function renderInput(label: string, isPassword: boolean) {
+  function renderInput(input: LoginInputsType) {
+    const { label, isPassword, name } = input
     const passwordStyle = isPassword ? styles.passwordInput : null
+    const hideContent: boolean = isPassword && isPasswordHide
+    const hasError: boolean = getInputHasError(name)
+    const errorStyle = hasError ? styles.inputError : null
+
     return (
       <View style={styles.containerInput}>
         <Text style={styles.inputLabel}>{label}</Text>
-        <TextInput style={[styles.input, passwordStyle]} />
+        <TextInput onBlur={() => handleCheckForErrors(input)} onChangeText={(text) => onInputChange(name, text)} secureTextEntry={hideContent} style={[styles.input, passwordStyle, errorStyle]} />
+        {renderErrorMessage(name)}
         {renderPasswordExtraContent(isPassword)}
       </View>
     )
@@ -37,8 +50,8 @@ export function Login() {
     <View style={styles.container}>
       <Image style={styles.logoImage} source={FullLogo} />
       <Text style={styles.title}>Log in and start Working</Text>
-      {renderInput('Email', false)}
-      {renderInput('Password', true)}
+      {renderInput(LOGIN_INPUTS.EMAIL)}
+      {renderInput(LOGIN_INPUTS.PASSWORD)}
       <Pressable style={styles.loginButton}>
         <Text style={styles.loginButtonText}>Log in</Text>
       </Pressable>
