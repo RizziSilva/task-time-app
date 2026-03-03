@@ -7,6 +7,7 @@ dotenv.config({
 })
 
 module.export = {
+  entryPoint: './app.tsx',
   name: 'task-time-app',
   slug: 'task-time-app',
   version: '1.0.0',
