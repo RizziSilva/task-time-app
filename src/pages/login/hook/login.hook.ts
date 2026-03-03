@@ -4,7 +4,7 @@ import { LoginFormErrorType, LoginFormType, LoginInputsType } from '@types'
 import { LOGIN_INITIAL_ERRORS, LOGIN_INITIAL_FORM } from '../constants'
 
 export function useLogin() {
-  const [isPasswordHide, setIsPasswordHide] = useState(true)
+  const [isPasswordHidden, setIsPasswordHidden] = useState(true)
   const [form, setForm] = useState<LoginFormType>(LOGIN_INITIAL_FORM)
   const [formErrors, setFormErrors] = useState<LoginFormErrorType>(LOGIN_INITIAL_ERRORS)
 
@@ -26,11 +26,11 @@ export function useLogin() {
   }
 
   function handleShowPasswordClick() {
-    setIsPasswordHide(!isPasswordHide)
+    setIsPasswordHidden(!isPasswordHidden)
   }
 
   function getPasswordIcon() {
-    return isPasswordHide ? OpenedEye : ClosedEye
+    return isPasswordHidden ? OpenedEye : ClosedEye
   }
 
   function getErrorMessage(name: string) {
@@ -46,7 +46,7 @@ export function useLogin() {
   }
 
   return {
-    isPasswordHide,
+    isPasswordHidden,
     handleShowPasswordClick,
     getPasswordIcon,
     onInputChange,

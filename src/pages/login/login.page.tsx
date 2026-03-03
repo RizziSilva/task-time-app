@@ -6,7 +6,7 @@ import { useLogin } from './hook'
 import { styles } from './login.style'
 
 export function Login() {
-  const { isPasswordHide, handleShowPasswordClick, getPasswordIcon, onInputChange, handleCheckForErrors, getErrorMessage, getInputHasError } = useLogin()
+  const { isPasswordHidden, handleShowPasswordClick, getPasswordIcon, onInputChange, handleCheckForErrors, getErrorMessage, getInputHasError } = useLogin()
 
   function renderErrorMessage(name: string) {
     const message: string = getErrorMessage(name)
@@ -32,7 +32,7 @@ export function Login() {
   function renderInput(input: LoginInputsType) {
     const { label, isPassword, name } = input
     const passwordStyle = isPassword ? styles.passwordInput : null
-    const hideContent: boolean = isPassword && isPasswordHide
+    const hideContent: boolean = isPassword && isPasswordHidden
     const hasError: boolean = getInputHasError(name)
     const errorStyle = hasError ? styles.inputError : null
 
