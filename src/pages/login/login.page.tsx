@@ -6,7 +6,13 @@ import { useLogin } from './hook'
 import { styles } from './login.style'
 
 export function Login() {
-  const { isPasswordHidden, handleShowPasswordClick, getPasswordIcon, onInputChange, handleCheckForErrors, getErrorMessage, getInputHasError } = useLogin()
+  const { isPasswordHidden, handleShowPasswordClick, getPasswordIcon, onInputChange, handleCheckForErrors, getErrorMessage, getInputHasError, handleLoginClick, loginErrorMessage } = useLogin()
+
+  function renderLoginErrorMessage() {
+    if (!loginErrorMessage) return null
+
+    return <Text style={styles.loginError}>{loginErrorMessage}</Text>
+  }
 
   function renderErrorMessage(name: string) {
     const message: string = getErrorMessage(name)
@@ -50,9 +56,10 @@ export function Login() {
     <View style={styles.container}>
       <Image style={styles.logoImage} source={FullLogo} />
       <Text style={styles.title}>Log in and start Working</Text>
+      {renderLoginErrorMessage()}
       {renderInput(LOGIN_INPUTS.EMAIL)}
       {renderInput(LOGIN_INPUTS.PASSWORD)}
-      <Pressable style={styles.loginButton}>
+      <Pressable onPress={handleLoginClick} style={styles.loginButton}>
         <Text style={styles.loginButtonText}>Log in</Text>
       </Pressable>
       <Pressable style={styles.signUpButton}>

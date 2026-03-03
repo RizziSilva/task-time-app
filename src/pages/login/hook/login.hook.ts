@@ -1,12 +1,26 @@
 import { useState } from 'react'
+import { AuthService } from '@services'
 import { ClosedEye, OpenedEye } from '@statics'
 import { LoginFormErrorType, LoginFormType, LoginInputsType } from '@types'
-import { LOGIN_INITIAL_ERRORS, LOGIN_INITIAL_FORM } from '../constants'
+import { LOGIN_ERROR_MESSAGE, LOGIN_INITIAL_ERRORS, LOGIN_INITIAL_FORM, UNAUTHORIZED_ERROR_MESSAGE } from '../constants'
 
 export function useLogin() {
   const [isPasswordHidden, setIsPasswordHidden] = useState(true)
   const [form, setForm] = useState<LoginFormType>(LOGIN_INITIAL_FORM)
   const [formErrors, setFormErrors] = useState<LoginFormErrorType>(LOGIN_INITIAL_ERRORS)
+  const [loginErrorMessage, setLoginErrorMessage] = useState('')
+  const { login } = AuthService()
+
+  async function handleLoginClick() {
+    try {
+      await login(form.email, form.password)
+    } catch (error) {
+      console.error(JSON.stringify(error))
+      const isUnauthorized = error.response?.status === 401
+      if (isUnauthorized) setLoginErrorMessage(UNAUTHORIZED_ERROR_MESSAGE)
+      else setLoginErrorMessage(LOGIN_ERROR_MESSAGE)
+    }
+  }
 
   function onInputChange(name: string, value: string) {
     setForm({ ...form, [name]: value })
@@ -53,5 +67,7 @@ export function useLogin() {
     getErrorMessage,
     handleCheckForErrors,
     getInputHasError,
+    handleLoginClick,
+    loginErrorMessage,
   }
 }

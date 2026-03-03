@@ -2,10 +2,9 @@ import { StyleSheet } from 'react-native'
 
 export const styles = StyleSheet.create({
   container: {
-    flex: 1,
     maxWidth: 344,
     width: 344,
-    maxHeight: 576,
+    maxHeight: 430,
     backgroundColor: '#1b1b1b',
     borderRadius: 8,
     padding: 32,
@@ -18,6 +17,12 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 500,
     color: '#b1b1b1',
+  },
+  loginError: {
+    color: '#e89081',
+    fontSize: 14,
+    fontWeight: 500,
+    marginVertical: 20,
   },
   loginButton: {
     width: '100%',
