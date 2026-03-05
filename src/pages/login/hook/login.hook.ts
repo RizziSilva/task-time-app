@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import axios from 'axios'
 import { AuthService } from '@services'
 import { ClosedEye, OpenedEye } from '@statics'
 import { LoginFormErrorType, LoginFormType, LoginInputsType } from '@types'
@@ -11,14 +12,16 @@ export function useLogin() {
   const [loginErrorMessage, setLoginErrorMessage] = useState('')
   const { login } = AuthService()
 
+  // TODO silva.william 05/03/2026: Redirecionar o usuário para a stack da home quando ela existir.
   async function handleLoginClick() {
     try {
       await login(form.email, form.password)
+      setLoginErrorMessage('')
     } catch (error) {
-      console.error(JSON.stringify(error))
-      const isUnauthorized = error.response?.status === 401
-      if (isUnauthorized) setLoginErrorMessage(UNAUTHORIZED_ERROR_MESSAGE)
-      else setLoginErrorMessage(LOGIN_ERROR_MESSAGE)
+      if (axios.isAxiosError(error)) {
+        const isUnauthorized = error.response?.status === 401
+        if (isUnauthorized) setLoginErrorMessage(UNAUTHORIZED_ERROR_MESSAGE)
+      } else setLoginErrorMessage(LOGIN_ERROR_MESSAGE)
     }
   }
 

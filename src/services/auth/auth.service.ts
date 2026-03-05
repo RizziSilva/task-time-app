@@ -1,4 +1,4 @@
-import { apiInstance } from 'src/services/instance/instance.service'
+import { apiInstance } from '../instance/instance.service'
 
 export function AuthService() {
   async function login(email: string, password: string): Promise<any> {
