@@ -10,7 +10,8 @@
       "@layout": ["./src/layout/"],
       "@types": ["./src/types/"],
       "@statics": ["./src/statics/"],
-      "@services": ["./src/services/"]
+      "@services": ["./src/services/"],
+      "@styles": ["./src/styles/"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx", "src/types/declaration.d.ts"]

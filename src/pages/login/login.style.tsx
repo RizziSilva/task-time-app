@@ -1,11 +1,12 @@
 import { StyleSheet } from 'react-native'
+import { COLORS, DEFAULT_STYLES } from '@styles'
 
 export const styles = StyleSheet.create({
   container: {
     maxWidth: 344,
     width: 344,
     maxHeight: 430,
-    backgroundColor: '#1b1b1b',
+    backgroundColor: COLORS.COD_GRAY,
     borderRadius: 8,
     padding: 32,
     alignItems: 'center',
@@ -16,17 +17,17 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     fontWeight: 500,
-    color: '#b1b1b1',
+    color: COLORS.SILVER_CHALICE,
   },
   loginError: {
-    color: '#e89081',
+    color: DEFAULT_STYLES.ERROR_COLOR,
     fontSize: 14,
     fontWeight: 500,
     marginVertical: 20,
   },
   loginButton: {
     width: '100%',
-    backgroundColor: '#D65C56',
+    backgroundColor: COLORS.ROMAN,
     paddingHorizontal: 10,
     alignItems: 'center',
     height: 36,
@@ -48,17 +49,17 @@ export const styles = StyleSheet.create({
     position: 'relative',
   },
   inputLabel: {
-    color: '#b1b1b1',
+    color: COLORS.SILVER_CHALICE,
     marginBottom: 4,
   },
   input: {
     width: '100%',
     borderWidth: 1,
     borderRadius: 8,
-    borderColor: '#555555',
+    borderColor: COLORS.EMPEROR,
     paddingVertical: 8,
     paddingHorizontal: 12,
-    color: '#ffffff',
+    color: COLORS.WHITE,
     height: 36,
     fontWeight: 500,
     fontSize: 14,
@@ -68,7 +69,7 @@ export const styles = StyleSheet.create({
   },
   resetPasswordText: {
     textDecorationLine: 'underline',
-    color: '#ffffff',
+    color: COLORS.WHITE,
     fontWeight: 500,
     borderRadius: 4,
     fontSize: 12,
@@ -83,15 +84,15 @@ export const styles = StyleSheet.create({
   passwordImage: {
     width: 20,
     height: 20,
-    color: '#ffffff',
+    color: COLORS.WHITE,
   },
   errorMessage: {
-    color: '#e89081',
+    color: DEFAULT_STYLES.ERROR_COLOR,
     fontWeight: 500,
     fontSize: 12,
     marginVertical: 4,
   },
   inputError: {
-    borderColor: '#e89081',
+    borderColor: DEFAULT_STYLES.ERROR_COLOR,
   },
 })
