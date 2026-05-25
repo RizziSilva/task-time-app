@@ -11,7 +11,8 @@
       "@types": ["./src/types/"],
       "@statics": ["./src/statics/"],
       "@services": ["./src/services/"],
-      "@styles": ["./src/styles/"]
+      "@styles": ["./src/styles/"],
+      "@utils": ["./src/utils/"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx", "src/types/declaration.d.ts"]
