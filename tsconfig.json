@@ -9,7 +9,8 @@
       "@constants": ["./src/constants/"],
       "@layout": ["./src/layout/"],
       "@types": ["./src/types/"],
-      "@statics": ["./src/statics/"]
+      "@statics": ["./src/statics/"],
+      "@services": ["./src/services/"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx", "src/types/declaration.d.ts"]
