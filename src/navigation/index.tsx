@@ -5,9 +5,10 @@ import { NavigationContainer } from '@react-navigation/native'
 import { checkUserAction, useAppDispatch, useAppSelector } from '@slices'
 import { AppStack } from './app.stack'
 
+// TODO silva.william 28/05/2026: Utilizar o isLoading para manter o usuário na splashscreen enquanto carrega.
 export function Navigation() {
   const dispatch = useAppDispatch()
-  const { user, isLoading } = useAppSelector((state) => state.auth)
+  const { user } = useAppSelector((state) => state.auth)
 
   useEffect(() => {
     dispatch(checkUserAction())
@@ -21,9 +22,7 @@ export function Navigation() {
 
   return (
     <SafeAreaProvider>
-      <NavigationContainer>
-        <AppStack />
-      </NavigationContainer>
+      <NavigationContainer>{renderStack()}</NavigationContainer>
     </SafeAreaProvider>
   )
 }

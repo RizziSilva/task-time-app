@@ -17,21 +17,23 @@ const initialState: AuthState = {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {
-    forceUserLogout: (state) => {
-      state.user = null
-      state.isLoading = false
-      state.error = null
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(checkUserAction.fulfilled, (state, action) => {
       state.user = action.payload as UserType
       state.isLoading = false
     })
+    builder.addCase(checkUserAction.rejected, (state, action) => {
+      state.user = null
+      state.isLoading = false
+    })
+    builder.addCase(checkUserAction.pending, (state, action) => {
+      state.isLoading = true
+    })
     builder.addCase(loginAction.fulfilled, (state, action) => {
       state.isLoading = false
       state.error = null
+      state.user = action.payload as UserType
     })
     builder.addCase(loginAction.pending, (state, action) => {
       state.isLoading = true
@@ -47,5 +49,6 @@ const authSlice = createSlice({
   },
 })
 
-export const { forceUserLogout } = authSlice.actions
+export const {} = authSlice.actions
+export { checkUserAction, loginAction, logoutAction }
 export default authSlice.reducer

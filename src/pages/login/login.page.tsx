@@ -1,4 +1,5 @@
 import { Image, Pressable, Text, TextInput, View } from 'react-native'
+import { useAppSelector } from '@slices'
 import { FullLogo } from '@statics'
 import { LoginInputsType } from '@types'
 import { LOGIN_INPUTS } from './constants'
@@ -6,12 +7,13 @@ import { useLogin } from './hook'
 import { styles } from './login.style'
 
 export function Login() {
-  const { isPasswordHidden, handleShowPasswordClick, getPasswordIcon, onInputChange, handleCheckForErrors, getErrorMessage, getInputHasError, handleLoginClick, loginErrorMessage } = useLogin()
+  const { isPasswordHidden, handleShowPasswordClick, getPasswordIcon, onInputChange, handleCheckForErrors, getErrorMessage, getInputHasError, handleLoginClick } = useLogin()
+  const { error } = useAppSelector((state) => state.auth)
 
   function renderLoginErrorMessage() {
-    if (!loginErrorMessage) return null
+    if (!error) return null
 
-    return <Text style={styles.loginError}>{loginErrorMessage}</Text>
+    return <Text style={styles.loginError}>{error}</Text>
   }
 
   function renderErrorMessage(name: string) {

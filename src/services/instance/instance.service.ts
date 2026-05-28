@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { BASE_URL } from '@constants'
-import { forceUserLogout, store } from '@slices'
+import { logoutAction, store } from '@slices'
 import { getAccessToken, getRefreshToken, saveTokens } from '@utils'
 
 const apiInstance = axios.create({
@@ -33,16 +33,16 @@ apiInstance.interceptors.response.use(
 
     try {
       const currentRefreshToken = await getRefreshToken()
-      const { data } = await apiInstance.post(`/auth/refresh`, {}, { headers: { Authorization: `Bearer ${currentRefreshToken}` } })
+      const { data } = await axios.post(`${BASE_URL}/auth/refresh`, {}, { headers: { 'x-refresh-token': `Bearer ${currentRefreshToken}` } })
       const { access_token: accessToken, refresh_token: refreshToken } = data
 
       await saveTokens(accessToken, refreshToken)
 
-      originalRequest.headers.Authorization = `Bearer ${data.accessToken}`
+      originalRequest.headers.Authorization = `Bearer ${accessToken}`
 
       return apiInstance(originalRequest)
     } catch (error) {
-      store.dispatch(forceUserLogout())
+      store.dispatch(logoutAction())
 
       return Promise.reject(error)
     }
