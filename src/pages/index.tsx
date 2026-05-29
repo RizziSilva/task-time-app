@@ -1,2 +1,2 @@
+export { Home as Timer } from './home/home.page'
 export { Login } from './login/login.page'
-export { Timer } from './timer/timer.page'

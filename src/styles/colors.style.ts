@@ -6,4 +6,6 @@ export const COLORS = {
   SILVER_CHALICE: '#b1b1b1',
   EMPEROR: '#555555',
   WHITE: '#ffffff',
+  MINE_SHAFT: '#3a3a3a',
+  DELTA: '#a4a4a0',
 }
